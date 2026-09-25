@@ -1,26 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   DESIGN SYSTEM TOKENS
+   Defines color variables, elevations, and theme tokens
+   so components don't repeat raw color codes.
+───────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Typography */
+  --font-family-base: 'Varela Round', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Brand Colors (Universal) */
+  --color-brand: #4F6BFF;
+  --color-brand-hover: #415CE0;
+  --color-brand-tint: #EEF1FF;
+  --color-brand-glow: rgba(79, 107, 255, 0.15);
+
+  --color-coral: #F2785C;
+  --color-coral-hover: #E06447;
+  --color-coral-tint: #FFEAE2;
+  --color-coral-glow: rgba(242, 120, 92, 0.12);
+
+  /* Light Theme Semantic Tokens */
+  --bg-canvas: #FAF7F2;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-subtle: #F3EFE9;
+  --bg-subtle-alt: #F6F2EB;
+  --bg-active-pill: #FFFFFF;
+  --bg-nav: rgba(255, 255, 255, 0.8);
+  --bg-nav-inner: rgba(246, 242, 235, 0.6);
+  --bg-card-hover: #EDE7DF;
+
+  --text-primary: #24272C;
+  --text-heading: #24272C;
+  --text-secondary: #6C727D;
+  --text-muted: #989EA8;
+  --text-nav: #6C727D;
+  --text-nav-active: #24272C;
+
+  --border-default: #EBE5DF;
+  --border-subtle: rgba(235, 229, 223, 0.7);
+  --border-divider: #E4DDD5;
+
+  --ambient-circle-1: rgba(238, 241, 255, 0.6);
+  --ambient-circle-2: rgba(255, 234, 226, 0.5);
+  --ambient-circle-3: #F3EFE9;
+
+  --shadow-soft: 0 10px 30px -5px rgba(36, 39, 44, 0.05),
+                0 4px 12px -2px rgba(36, 39, 44, 0.02);
+  --shadow-card: 0 16px 36px -8px rgba(79, 107, 255, 0.07),
+                0 4px 16px -2px rgba(36, 39, 44, 0.03);
 }
 
+/* Dark Theme Overrides */
+.dark, [data-theme="dark"] {
+  --bg-canvas: #18191B;
+  --bg-surface: #202227;
+  --bg-surface-elevated: #282B32;
+  --bg-subtle: #272A30;
+  --bg-subtle-alt: #282B32;
+  --bg-active-pill: #333741;
+  --bg-nav: rgba(32, 34, 39, 0.9);
+  --bg-nav-inner: rgba(40, 43, 50, 0.7);
+  --bg-card-hover: #333741;
+
+  --text-primary: #EDEDED;
+  --text-heading: #FFFFFF;
+  --text-secondary: #D4D4D8;
+  --text-muted: #989EA8;
+  --text-nav: #A1A1AA;
+  --text-nav-active: #FFFFFF;
+
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-divider: rgba(255, 255, 255, 0.12);
+
+  --ambient-circle-1: rgba(79, 107, 255, 0.15);
+  --ambient-circle-2: rgba(242, 120, 92, 0.1);
+  --ambient-circle-3: rgba(255, 255, 255, 0.05);
+
+  --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.35),
+                0 4px 12px -2px rgba(0, 0, 0, 0.25);
+  --shadow-card: 0 16px 36px -8px rgba(0, 0, 0, 0.45),
+                0 4px 16px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TAILWIND THEME MAPPINGS
+   Exposes tokens as utility classes:
+   e.g. bg-canvas, bg-surface, text-theme-heading, border-theme-border
+───────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-elevated: var(--bg-surface-elevated);
+  --color-subtle: var(--bg-subtle);
+  --color-subtle-alt: var(--bg-subtle-alt);
+  --color-active-pill: var(--bg-active-pill);
+  --color-nav: var(--bg-nav);
+  --color-nav-inner: var(--bg-nav-inner);
+  --color-card-hover: var(--bg-card-hover);
+
+  --color-theme-primary: var(--text-primary);
+  --color-theme-heading: var(--text-heading);
+  --color-theme-secondary: var(--text-secondary);
+  --color-theme-muted: var(--text-muted);
+  --color-theme-nav: var(--text-nav);
+  --color-theme-nav-active: var(--text-nav-active);
+
+  --color-theme-border: var(--border-default);
+  --color-theme-border-subtle: var(--border-subtle);
+  --color-theme-divider: var(--border-divider);
+
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-tint: var(--color-brand-tint);
+
+  --color-coral: var(--color-coral);
+  --color-coral-hover: var(--color-coral-hover);
+  --color-coral-tint: var(--color-coral-tint);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────────────────────
+   GLOBAL RESETS & UTILITIES
+───────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll compatibility */
+html.lenis {
+  height: auto;
+}
+
+/* Custom shadows based on design tokens */
+.soft-shadow {
+  box-shadow: var(--shadow-soft);
+}
+
+.soft-card-shadow {
+  box-shadow: var(--shadow-card);
+}
+
+/* Dot grid background texture */
+.micro-dot-bg {
+  background-image: radial-gradient(rgba(79, 107, 255, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transition for theme switches */
+.theme-base {
+  transition:
+    background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    color            0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Circular reveal ripple overlay for theme toggle */
+#theme-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: clip-path;
 }
