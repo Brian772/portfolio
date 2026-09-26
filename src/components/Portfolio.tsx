@@ -9,9 +9,11 @@ import { Navbar } from "./navigation/Navbar";
 import { HeroSection } from "./hero/HeroSection";
 import { SelectedWorkSection } from "./work/SelectedWorkSection";
 import { SocialDivider } from "./footer/SocialDivider";
+import { AboutSection } from "./about/AboutSection";
 import { BottomFooter } from "./footer/BottomFooter";
 import { TabType } from "./types";
 import { CustomScrollbar } from "./common/CustonScroll";
+
 
 function PortfolioContent() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
@@ -40,6 +42,7 @@ function PortfolioContent() {
         {/* Structured Sections */}
         <div className="relative w-full max-w-[1540px] mx-auto px-4 sm:px-8 md:px-12 z-10 flex flex-col gap-14 sm:gap-20">
           <HeroSection />
+          <AboutSection />
           <SelectedWorkSection />
           <SocialDivider />
         </div>
