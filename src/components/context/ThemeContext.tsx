@@ -21,19 +21,34 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
+function syncThemePreference(nextDarkMode: boolean) {
+  if (typeof window === "undefined") return;
+
+  const value = nextDarkMode ? "dark" : "light";
+  document.documentElement.classList.toggle("dark", nextDarkMode);
+  document.cookie = `theme=${value}; path=/; max-age=31536000; SameSite=Lax`;
+  localStorage.setItem("theme", value);
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const preferredTheme = localStorage.getItem("theme");
+    const cookieTheme = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("theme="))
+      ?.split("=")[1];
+
+    const storageTheme = localStorage.getItem("theme");
     const nextDarkMode =
-      preferredTheme === "dark" ||
+      cookieTheme === "dark" ||
+      storageTheme === "dark" ||
       document.documentElement.classList.contains("dark");
 
     setIsDarkMode(nextDarkMode);
-    document.documentElement.classList.toggle("dark", nextDarkMode);
+    syncThemePreference(nextDarkMode);
   }, []);
 
   const themeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -49,8 +64,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (!btn || !overlay) {
       setIsDarkMode((prev) => {
         const next = !prev;
-        document.documentElement.classList.toggle("dark", next);
-        document.cookie = `theme=${next ? "dark" : "light"}; path=/; max-age=31536000`; // 👈 di sini
+        syncThemePreference(next);
         return next;
       });
       isAnimating.current = false;
@@ -86,8 +100,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       onComplete: () => {
         flushSync(() => {
           setIsDarkMode(next);
-          document.documentElement.classList.toggle("dark", next); // 👈 disederhanakan
-          document.cookie = `theme=${next ? "dark" : "light"}; path=/; max-age=31536000`; // 👈 ganti localStorage jadi cookie
+          syncThemePreference(next);
         });
 
         // Phase 3: smooth fade out to reveal the already updated DOM

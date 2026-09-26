@@ -5,9 +5,12 @@ import { OrbiiProjectCard } from "./OrbiiProjectCard";
 
 export function SelectedWorkSection() {
   return (
-    <section className="w-full pt-8 sm:pt-12 pb-6" id="work">
+    <section className="w-full pt-8 sm:pt-12 pb-6" id="work" data-reveal-group>
       {/* Section Header */}
-      <div className="theme-base flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-8 border-b border-theme-border">
+      <div
+        data-reveal
+        className="theme-base flex flex-col md:flex-row md:items-end justify-between gap-3 pb-6 sm:pb-8 border-b border-theme-border"
+      >
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="w-2 h-2 rounded-full bg-brand" />
@@ -26,7 +29,9 @@ export function SelectedWorkSection() {
       </div>
 
       {/* Project Card */}
-      <OrbiiProjectCard />
+      <div data-reveal>
+        <OrbiiProjectCard />
+      </div>
     </section>
   );
 }

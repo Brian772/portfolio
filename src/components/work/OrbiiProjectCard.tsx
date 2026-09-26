@@ -25,8 +25,8 @@ export function OrbiiProjectCard() {
   ];
 
   return (
-    <div className="theme-base mt-8 border border-theme-border rounded-3xl sm:rounded-4xl p-6 sm:p-10 soft-card-shadow hover:border-brand/40 group bg-surface">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <div className="theme-base mt-8 border border-theme-border rounded-3xl sm:rounded-[2rem] p-4 sm:p-8 lg:p-10 soft-card-shadow hover:border-brand/40 group bg-surface">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
         {/* Left Column: Project Overview */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div>
@@ -43,7 +43,7 @@ export function OrbiiProjectCard() {
                 </span>
               ))}
             </div>
-            <h4 className="theme-base text-3xl sm:text-4xl font-bold tracking-tight group-hover:text-brand text-theme-heading transition-colors">
+            <h4 className="theme-base text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight group-hover:text-brand text-theme-heading transition-colors">
               ORBII — Hobby Club Platform
             </h4>
             <p className="mt-4 text-sm sm:text-base text-theme-secondary leading-relaxed">
@@ -86,7 +86,7 @@ export function OrbiiProjectCard() {
 
         {/* Right Column: Mock Browser Preview */}
         <div className="lg:col-span-7">
-          <div className="relative w-full aspect-video rounded-3xl overflow-hidden border border-theme-border-subtle bg-subtle">
+          <div className="relative w-full aspect-[4/3] sm:aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-theme-border-subtle bg-subtle">
           <img src="/images/orbii-project.png" alt="Orbii Project" className="object-cover w-full h-full" />
           </div>
         </div>

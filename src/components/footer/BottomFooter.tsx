@@ -8,7 +8,7 @@ export function BottomFooter() {
 
   return (
     <footer className="theme-base fixed bottom-0 left-0 w-full z-40 backdrop-blur-md border-t border-theme-border bg-nav text-theme-secondary">
-      <div className="h-10 w-full max-w-[1540px] mx-auto px-4 sm:px-8 flex items-center justify-between text-xs font-medium">
+      <div className="h-10 w-full max-w-[1540px] mx-auto px-3 sm:px-8 flex items-center justify-between gap-2 text-xs font-medium">
         {/* Left: Design Harmony & Location */}
         <div className="flex items-center gap-3">
           <span className="hidden lg:inline text-theme-muted">
@@ -22,8 +22,9 @@ export function BottomFooter() {
         {/* Center: Scroll prompt */}
         <div className="flex items-center gap-1.5 text-brand">
           <ArrowDown size={15} className="animate-bounce" />
-          <span className="font-semibold tracking-wider text-[11px] uppercase">
-            Scroll to explore · 01 / 03
+          <span className="font-semibold tracking-wider text-[10px] sm:text-[11px] uppercase whitespace-nowrap">
+            <span className="sm:hidden">Scroll · 01 / 03</span>
+            <span className="hidden sm:inline">Scroll to explore · 01 / 03</span>
           </span>
         </div>
 

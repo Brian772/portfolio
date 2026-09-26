@@ -12,9 +12,13 @@ export function SocialDivider() {
   ];
 
   return (
-    <div className="w-full flex flex-col sm:flex-row items-center justify-between pt-2 pb-6 text-xs font-medium gap-3 sm:gap-0">
+    <div
+      className="w-full flex flex-col sm:flex-row items-center justify-between pt-2 pb-6 text-xs font-medium gap-3 sm:gap-0"
+      id="contact"
+      data-reveal-group
+    >
       {/* Brand & Year */}
-      <div className="flex items-center gap-2">
+      <div data-reveal className="flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-brand" />
         <span className="theme-base text-theme-secondary">
           Brian Ardhisswara · 2025
@@ -25,7 +29,10 @@ export function SocialDivider() {
       <div className="theme-base hidden sm:block h-px flex-1 mx-4 bg-theme-border" />
 
       {/* External Links */}
-      <div className="theme-base flex items-center gap-5 font-medium text-theme-secondary">
+      <div
+        data-reveal
+        className="theme-base flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-5 font-medium text-theme-secondary"
+      >
         {socialLinks.map((s) => (
           <a
             key={s.name}

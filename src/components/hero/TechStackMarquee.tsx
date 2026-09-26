@@ -215,7 +215,7 @@ export function TechStackMarquee() {
           {duplicatedList.map((tech, index) => (
             <div
               key={`${tech.name}-${index}`}
-              className="theme-base group flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-theme-border bg-surface soft-shadow hover:border-brand/50 hover:scale-[1.03] transition-all cursor-pointer"
+              className="theme-base group flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-theme-border bg-surface soft-shadow hover:border-brand/50 hover:scale-[1.03] transition-all cursor-pointer"
             >
               {/* Icon Container */}
               <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-subtle border border-theme-border-subtle group-hover:bg-brand-tint transition-colors shrink-0">

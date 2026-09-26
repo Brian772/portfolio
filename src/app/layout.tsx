@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
 import { Varela_Round } from "next/font/google";
 import "./globals.css";
@@ -11,6 +11,12 @@ const varelaRound = Varela_Round({
 export const metadata: Metadata = {
   title: "Brian Ardhisswara",
   description: "Personal portfolio of Brian Ardhisswara",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default async function RootLayout({

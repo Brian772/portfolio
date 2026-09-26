@@ -1,13 +1,16 @@
 "use client";
 
 import React, {
-  useEffect,
+  useLayoutEffect,
   createContext,
   useContext,
   useRef,
   useState,
 } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { registerGsapPlugins } from "../motion/registerGsap";
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -15,7 +18,9 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const [instance, setInstance] = useState<Lenis | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    registerGsapPlugins();
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -25,16 +30,23 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     lenisRef.current = lenis;
     setInstance(lenis);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    const onScroll = () => ScrollTrigger.update();
+    lenis.on("scroll", onScroll);
 
-    const id = requestAnimationFrame(raf);
+    const tick = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
-      cancelAnimationFrame(id);
+      gsap.ticker.remove(tick);
+      gsap.ticker.lagSmoothing(500, 33);
+      lenis.off("scroll", onScroll);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
