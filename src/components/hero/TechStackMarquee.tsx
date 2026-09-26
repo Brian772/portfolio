@@ -184,16 +184,6 @@ export function TechStackMarquee() {
 
   return (
     <div className="relative w-full my-6 sm:my-8 z-20" data-hero>
-      {/* Label and Badge */}
-      <div className="flex items-center justify-start mb-3 px-1">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-          <span className="text-xs uppercase tracking-widest text-brand font-semibold">
-            Tech Stack &amp; Tools
-          </span>
-        </div>
-      </div>
-
       {/* Infinite Scroll Container */}
       <div
         ref={containerRef}

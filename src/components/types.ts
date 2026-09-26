@@ -1,4 +1,4 @@
-export type TabType = "work" | "process" | "about";
+export type TabType = "home" | "about" | "work" | "process" | "contact";
 
 export interface ClubItem {
   tag: string;

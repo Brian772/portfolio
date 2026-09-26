@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import { TechStackMarquee } from "./TechStackMarquee";
 import { MetaItem } from "../types";
 
+gsap.registerPlugin(TextPlugin);
+
+const TEXT = "I enjoy turning ideas into interfaces that feel simple, intentional, and useful from early concepts and visual systems to functional web experiences.";
+const ENTHUSIAST_TEXT = "UI/UX Enthusiast";
+
 export function HeroSection() {
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const enthusiastRef = useRef<HTMLParagraphElement>(null);
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from("[data-hero]", {
@@ -17,6 +26,28 @@ export function HeroSection() {
         ease: "power3.out",
         delay: 0.1,
       });
+
+      if (textRef.current) {
+        gsap.set(textRef.current, { text: "" });
+
+        gsap.to(textRef.current, {
+          duration: TEXT.length * 0.01,
+          text: TEXT,
+          ease: "none",
+          delay: 1.2,
+        });
+      }
+      
+      if (enthusiastRef.current) {
+        gsap.set(enthusiastRef.current, { text: "" });
+
+        gsap.to(enthusiastRef.current, {
+          duration: ENTHUSIAST_TEXT.length * 0.04,
+          text: ENTHUSIAST_TEXT,
+          ease: "none",
+          delay: 0.4,
+        });
+      }
     });
     return () => ctx.revert();
   }, []);
@@ -28,7 +59,7 @@ export function HeroSection() {
   ];
 
   return (
-    <div className="relative w-full flex flex-col pt-4 sm:pt-6">
+    <div className="relative w-full min-h-dvh flex flex-col pt-4 sm:pt-6" id="home">
       <div className="relative w-full">
         {/* Name / Main Heading */}
         <div className="select-none" data-hero>
@@ -38,28 +69,37 @@ export function HeroSection() {
         </div>
 
         {/* Role Subheading */}
-        <div className="select-none" data-hero>
-          <h2 className="text-[24px] sm:text-[66px] md:text-[74px] lg:text-[94px] uppercase font-bold tracking-tight text-brand leading-[0.94]">
-            UI/UX Enthusiast
+        <div className="select-none relative" data-hero>
+          <h2 className="text-[24px] sm:text-[66px] md:text-[74px] lg:text-[94px] uppercase font-bold tracking-tight text-brand leading-[0.94] invisible">
+            {ENTHUSIAST_TEXT}
           </h2>
+          <h2
+            ref={enthusiastRef}
+            className="absolute inset-0 text-[24px] sm:text-[66px] md:text-[74px] lg:text-[94px] uppercase font-bold tracking-tight text-brand leading-[0.94]"
+          />
         </div>
-
-        {/* Mastered Tech Stack - GSAP Infinite Scroll */}
-        <TechStackMarquee />
       </div>
 
       {/* Supporting statement */}
-      <div className="mt-4 sm:mt-6 max-w-2xl" data-hero>
-        <p className="theme-base text-base sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary">
-          I enjoy turning ideas into interfaces that feel simple, intentional,
-          and useful from early concepts and visual systems to functional web
-          experiences.
+      <div className="relativemt-4 sm:mt-6 max-w-2xl" data-hero>
+        <p
+          aria-hidden="true"
+          className="theme-base text-base sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary invisible"
+        >
+          {TEXT}
         </p>
+        <p
+          ref={textRef}
+          className="absolute inset-0 theme-base text-base sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary"
+        />
       </div>
+
+      {/* Mastered Tech Stack - GSAP Infinite Scroll */}
+      <TechStackMarquee />
 
       {/* Manifesto + CTAs + Meta Info */}
       <div
-        className="theme-base grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center pt-8 sm:pt-10 border-t border-theme-border mt-8"
+        className="theme-base grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center pt-4 sm:pt-10 border-t border-theme-border mt-6"
         data-hero
       >
         {/* Manifesto */}
@@ -71,9 +111,8 @@ export function HeroSection() {
             <div className="theme-base h-px flex-1 bg-theme-border" />
           </div>
           <p className="theme-base text-sm sm:text-base leading-relaxed text-theme-secondary">
-            I enjoy exploring the space between design and development.
-            Creating interfaces that not only look good, but also make sense to
-            use.
+            I enjoy exploring the space between design and development. Creating
+            interfaces that not only look good, but also make sense to use.
           </p>
         </div>
 

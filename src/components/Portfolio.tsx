@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
-import { useLenis } from "./hooks/useLenis";
+import { LenisProvider } from "./hooks/useLenis";
 import { ThemeOverlay } from "./common/ThemeOverlay";
 import { AmbientBackground } from "./common/AmbientBackground";
 import { Navbar } from "./navigation/Navbar";
@@ -11,12 +11,11 @@ import { SelectedWorkSection } from "./work/SelectedWorkSection";
 import { SocialDivider } from "./footer/SocialDivider";
 import { BottomFooter } from "./footer/BottomFooter";
 import { TabType } from "./types";
+import { CustomScrollbar } from "./common/CustonScroll";
 
 function PortfolioContent() {
-  const [activeTab, setActiveTab] = useState<TabType>("work");
+  const [activeTab, setActiveTab] = useState<TabType>("home");
   const { isDarkMode } = useTheme();
-
-  useLenis();
 
   return (
     <div
@@ -26,6 +25,9 @@ function PortfolioContent() {
     >
       {/* GSAP Ripple Reveal Overlay for Smooth Theme Transitions */}
       <ThemeOverlay />
+
+      {/* Custom Scrollbar */}
+      <CustomScrollbar />
 
       {/* Fixed Top Navigation Bar */}
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -42,9 +44,6 @@ function PortfolioContent() {
           <SocialDivider />
         </div>
       </main>
-
-      {/* Fixed Status Footer */}
-      <BottomFooter />
     </div>
   );
 }
@@ -52,7 +51,9 @@ function PortfolioContent() {
 export default function Portfolio() {
   return (
     <ThemeProvider>
-      <PortfolioContent />
+      <LenisProvider>
+        <PortfolioContent />
+      </LenisProvider>
     </ThemeProvider>
   );
 }

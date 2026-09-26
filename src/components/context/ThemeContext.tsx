@@ -7,6 +7,7 @@ import React, {
   useRef,
   useCallback,
   ReactNode,
+  useEffect,
 } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
@@ -22,6 +23,19 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const preferredTheme = localStorage.getItem("theme");
+    const nextDarkMode =
+      preferredTheme === "dark" ||
+      document.documentElement.classList.contains("dark");
+
+    setIsDarkMode(nextDarkMode);
+    document.documentElement.classList.toggle("dark", nextDarkMode);
+  }, []);
+
   const themeButtonRef = useRef<HTMLButtonElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const isAnimating = useRef(false);
@@ -33,7 +47,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const btn = themeButtonRef.current;
     const overlay = overlayRef.current;
     if (!btn || !overlay) {
-      setIsDarkMode((prev) => !prev);
+      setIsDarkMode((prev) => {
+        const next = !prev;
+        document.documentElement.classList.toggle("dark", next);
+        document.cookie = `theme=${next ? "dark" : "light"}; path=/; max-age=31536000`; // 👈 di sini
+        return next;
+      });
       isAnimating.current = false;
       return;
     }
@@ -48,8 +67,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       Math.ceil(
         Math.hypot(
           Math.max(cx, window.innerWidth - cx),
-          Math.max(cy, window.innerHeight - cy)
-        )
+          Math.max(cy, window.innerHeight - cy),
+        ),
       ) * 2.2;
 
     // Overlay matches the target theme canvas color
@@ -65,14 +84,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       duration: 0.6,
       ease: "power3.inOut",
       onComplete: () => {
-        // Phase 2: synchronous commit of state update
         flushSync(() => {
           setIsDarkMode(next);
-          if (next) {
-            document.documentElement.classList.add("dark");
-          } else {
-            document.documentElement.classList.remove("dark");
-          }
+          document.documentElement.classList.toggle("dark", next); // 👈 disederhanakan
+          document.cookie = `theme=${next ? "dark" : "light"}; path=/; max-age=31536000`; // 👈 ganti localStorage jadi cookie
         });
 
         // Phase 3: smooth fade out to reveal the already updated DOM
