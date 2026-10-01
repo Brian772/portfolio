@@ -38,7 +38,7 @@ export function AboutSection() {
         >
           <img
             data-parallax-img
-            src="/images/about-me.jpg"
+            src="/images/about-me.jpeg"
             alt="Brian Ardhisswara, UI/UX Designer and Frontend Developer, smiling in a modern workspace"
             className="w-full h-full object-cover will-change-transform scale-110 origin-top"
             loading="lazy"
