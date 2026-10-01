@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { registerGsapPlugins } from "../motion/registerGsap";
 
 interface TechItem {
   name: string;
@@ -150,40 +151,67 @@ const TECH_STACK: TechItem[] = [
 ];
 
 export function TechStackMarquee() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
+    registerGsapPlugins();
+    const wrapper = wrapperRef.current;
+    const container = containerRef.current;
     const track = trackRef.current;
-    if (!track) return;
+    if (!wrapper || !container || !track) return;
 
-    // Seamless continuous infinite scroll with GSAP
+    // Fade transition when the marquee enters/exits the screen + seamless infinite scroll
     const ctx = gsap.context(() => {
+      gsap.fromTo(
+        container,
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 92%",
+            end: "bottom 8%",
+            toggleActions: "play reverse play reverse",
+          },
+        },
+      );
+
       tweenRef.current = gsap.to(track, {
         xPercent: -50,
         ease: "none",
         duration: 28,
         repeat: -1,
       });
-    }, containerRef);
+    }, wrapperRef);
 
     return () => ctx.revert();
   }, []);
 
   const handleMouseEnter = () => {
-    tweenRef.current?.pause();
+    if (!tweenRef.current) return;
+    gsap.to(tweenRef.current, { timeScale: 0.2, duration: 0.5, ease: "power2.out" });
   };
 
   const handleMouseLeave = () => {
-    tweenRef.current?.play();
+    if (!tweenRef.current) return;
+    gsap.to(tweenRef.current, { timeScale: 1, duration: 0.5, ease: "power2.out" });
   };
 
   // Duplicate items for seamless continuous looping
   const duplicatedList = [...TECH_STACK, ...TECH_STACK];
 
   return (
-    <div className="relative w-full my-6 sm:my-8 z-20" data-hero>
+    <div
+      ref={wrapperRef}
+      className="relative w-full my-6 sm:my-8 z-20"
+      data-hero
+    >
       {/* Infinite Scroll Container */}
       <div
         ref={containerRef}

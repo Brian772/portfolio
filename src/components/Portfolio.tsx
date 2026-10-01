@@ -11,6 +11,7 @@ import { SelectedWorkSection } from "./work/SelectedWorkSection";
 import { SocialDivider } from "./footer/SocialDivider";
 import { AboutSection } from "./about/AboutSection";
 import { ProcessSection } from "./process/ProcessSection";
+import { ContactSection } from "./contact/ContactSection";
 import { BottomFooter } from "./footer/BottomFooter";
 import { TabType } from "./types";
 import { CustomScrollbar } from "./common/CustonScroll";
@@ -29,6 +30,14 @@ function PortfolioContent() {
         isDarkMode ? "dark" : ""
       }`}
     >
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-brand focus:text-white focus:rounded-lg focus:font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
+
       {/* GSAP Ripple Reveal Overlay for Smooth Theme Transitions */}
       <ThemeOverlay />
 
@@ -39,7 +48,11 @@ function PortfolioContent() {
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Area */}
-      <main className="w-full pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-24 min-h-screen relative overflow-x-hidden">
+      <main
+        id="main-content"
+        className="w-full pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-24 min-h-screen relative overflow-x-hidden"
+        role="main"
+      >
         {/* Ambient Gradient Glows and Micro-Dot Grid */}
         <AmbientBackground />
 
@@ -52,9 +65,11 @@ function PortfolioContent() {
           <AboutSection />
           <ProcessSection />
           <SelectedWorkSection />
+          <ContactSection />
           <SocialDivider />
         </div>
       </main>
+      <BottomFooter />
     </div>
   );
 }

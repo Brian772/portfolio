@@ -7,7 +7,11 @@ export function BottomFooter() {
   const skillTags = ["UI/UX", "Frontend", "Product Design", "Interaction"];
 
   return (
-    <footer className="theme-base fixed bottom-0 left-0 w-full z-40 backdrop-blur-md border-t border-theme-border bg-nav text-theme-secondary">
+    <footer
+      className="theme-base fixed bottom-0 left-0 w-full z-40 backdrop-blur-md border-t border-theme-border bg-nav text-theme-secondary"
+      role="contentinfo"
+      aria-label="Footer navigation"
+    >
       <div className="h-10 w-full max-w-[1540px] mx-auto px-3 sm:px-8 flex items-center justify-between gap-2 text-xs font-medium">
         {/* Left: Design Harmony & Location */}
         <div className="flex items-center gap-3">
@@ -15,12 +19,12 @@ export function BottomFooter() {
             Design + Code Harmony
           </span>
           <span className="theme-base hidden md:inline border-l border-theme-border pl-3 text-theme-heading">
-            Tokyo &amp; Remote
+            Tokyo & Remote
           </span>
         </div>
 
         {/* Center: Scroll prompt */}
-        <div className="flex items-center gap-1.5 text-brand">
+        <div className="flex items-center gap-1.5 text-brand" aria-hidden="true">
           <ArrowDown size={15} className="animate-bounce" />
           <span className="font-semibold tracking-wider text-[10px] sm:text-[11px] uppercase whitespace-nowrap">
             <span className="sm:hidden">Scroll · 01 / 03</span>
@@ -29,19 +33,23 @@ export function BottomFooter() {
         </div>
 
         {/* Right: Skill list */}
-        <div className="hidden sm:flex items-center gap-1.5">
-          {skillTags.map((label, i) => (
-            <React.Fragment key={label}>
-              <span className="theme-base px-2 py-0.5 rounded-full text-[10px] font-medium bg-subtle text-theme-secondary">
-                {label}
-              </span>
-              {i < skillTags.length - 1 && (
-                <span className="text-theme-muted text-[10px]">//</span>
-              )}
-            </React.Fragment>
-          ))}
-          <span className="w-1.5 h-1.5 rounded-full bg-brand ml-1" />
-        </div>
+        <nav className="hidden sm:flex items-center gap-1.5" aria-label="Core skills">
+          <ul className="flex items-center gap-1.5 list-none m-0 p-0">
+            {skillTags.map((label, i) => (
+              <li key={label}>
+                <span className="theme-base px-2 py-0.5 rounded-full text-[10px] font-medium bg-subtle text-theme-secondary">
+                  {label}
+                </span>
+                {i < skillTags.length - 1 && (
+                  <span className="text-theme-muted text-[10px]" aria-hidden="true">//</span>
+                )}
+              </li>
+            ))}
+            <li>
+              <span className="w-1.5 h-1.5 rounded-full bg-brand ml-1" aria-hidden="true" />
+            </li>
+          </ul>
+        </nav>
       </div>
     </footer>
   );

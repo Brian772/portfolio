@@ -4,29 +4,10 @@ import React from "react";
 import { ArrowRight, Search } from "lucide-react";
 import { ClubItem } from "../types";
 
-export function OrbiiProjectCard() {
-  const clubCards: ClubItem[] = [
-    {
-      tag: "CRAFTS",
-      tagBg: "bg-coral-tint text-coral",
-      members: "42",
-      name: "Tokyo Ceramic Circle",
-      desc: "Bi-weekly studio glaze sessions & kiln firing meetups.",
-      location: "Nakameguro",
-    },
-    {
-      tag: "SOUND",
-      tagBg: "bg-brand-tint text-brand",
-      members: "18",
-      name: "Modular Synth Lab",
-      desc: "Patch sharing, Eurorack routing, and ambient jam sessions.",
-      location: "Shibuya",
-    },
-  ];
-
+export function StrideDailyProjectCard() {
   return (
     <article
-      className="theme-base mt-8 border border-theme-border rounded-3xl sm:rounded-[2rem] p-4 sm:p-8 lg:p-10 soft-card-shadow hover:border-brand/40 group bg-surface"
+      className="theme-base mt-8 border border-theme-border rounded-3xl sm:rounded-4xl p-4 sm:p-8 lg:p-10 soft-card-shadow hover:border-brand/40 group bg-surface"
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
@@ -55,16 +36,17 @@ export function OrbiiProjectCard() {
               itemProp="name"
               className="theme-base text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight group-hover:text-brand text-theme-heading transition-colors"
             >
-              ORBII : Hobby Club Platform
+              Stride Daily : Habit Tracking & Productivity Platform
             </h3>
             <p
               itemProp="description"
               className="mt-4 text-sm sm:text-base text-theme-secondary leading-relaxed"
             >
-              A community-centered platform designed to help passionate
-              individuals find, organize, and grow localized hobby collectives.
-              Built from initial wireframes and interactive prototypes to a
-              production-ready design system.
+              A habit tracking and productivity platform designed to help
+              individuals build and maintain positive habits. From initial
+              wireframes and interactive prototypes to a production-ready design
+              system, this project emphasizes user engagement and seamless
+              experience.
             </p>
           </div>
 
@@ -90,25 +72,15 @@ export function OrbiiProjectCard() {
             ))}
           </dl>
 
-          <div className="pt-2 gap-4 flex flex-wrap">
+          <div className="pt-2 gap-4">
             <a
-              href="https://orbii.web.id"
+              href="https://stridedaily.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
               className="theme-base inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-active-pill text-theme-heading hover:bg-brand hover:text-white border border-theme-border transition-colors"
               aria-label="View Website"
             >
-              <span>View Website</span>
-              <ArrowRight size={15} aria-hidden="true" />
-            </a>
-            <a
-              href="https://github.com/Brian772/Club-Hobi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="theme-base inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-active-pill text-theme-heading hover:bg-brand hover:text-white border border-theme-border transition-colors"
-              aria-label="View Repository"
-            >
-              <span>View Repository</span>
+              <span>VIew Website</span>
               <ArrowRight size={15} aria-hidden="true" />
             </a>
           </div>
@@ -116,16 +88,16 @@ export function OrbiiProjectCard() {
 
         {/* Right Column: Mock Browser Preview */}
         <figure className="lg:col-span-7" itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <div className="relative w-full aspect-[4/3] sm:aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-theme-border-subtle bg-subtle">
+          <div className="relative w-full aspect-4/3 sm:aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-theme-border-subtle bg-subtle">
             <img
-              src="/images/orbii-project.png"
-              alt="ORBII Hobby Club Platform - dashboard interface showing club discovery and management features"
+              src="/images/stride-project.png"
+              alt="Stride Daily Habit Tracker - mobile and desktop interface showing habit tracking dashboard and progress visualization"
               className="object-cover w-full h-full"
               loading="lazy"
             />
           </div>
           <figcaption className="sr-only">
-            ORBII project screenshot showing the hobby club platform interface
+            Stride Daily project screenshot showing the habit tracking platform interface
           </figcaption>
         </figure>
       </div>

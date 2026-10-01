@@ -1,17 +1,24 @@
 export function AboutSection() {
   return (
-    <div className="w-full pt-8 sm:pt-12 pb-6" id="about">
+    <section
+      className="w-full pt-8 sm:pt-12 pb-6"
+      id="about"
+      aria-labelledby="about-heading"
+    >
       <div data-reveal-group>
         <div data-reveal>
           <div className="flex items-center gap-2 mb-2">
-            <span className="w-2 h-2 rounded-full bg-brand" />
+            <span className="w-2 h-2 rounded-full bg-brand" aria-hidden="true" />
             <span className="text-xs uppercase tracking-widest text-brand font-semibold">
               About Me
             </span>
           </div>
-          <h3 className="theme-base text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-theme-heading">
-            Desaigning interface with coriusity, building with purpose.
-          </h3>
+          <h2
+            id="about-heading"
+            className="theme-base text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-theme-heading"
+          >
+            Designing interfaces with curiosity, building with purpose.
+          </h2>
           <p className="theme-base max-w-3xl text-sm sm:text-base mt-4 md:text-lg text-theme-secondary">
             A student and interface enthusiast rooted in Malang, Indonesia.
             Dedicated to transforming abstract curiosities into warm, intuitive,
@@ -24,31 +31,33 @@ export function AboutSection() {
         data-reveal-group
         className="theme-base flex flex-col md:flex-row items-center md:items-start justify-between gap-10 md:gap-8 lg:gap-12 mt-8"
       >
-        <div
+        <figure
           data-reveal
           className="w-full max-w-sm md:max-w-none md:w-[42%] lg:w-[34%] aspect-9/11 rounded-2xl relative overflow-hidden shrink-0 bg-theme-border-subtle"
+          aria-label="Brian Ardhisswara portrait"
         >
           <img
             data-parallax-img
             src="/images/about-me.jpg"
-            alt="Brian Ardhisswara"
+            alt="Brian Ardhisswara, UI/UX Designer and Frontend Developer, smiling in a modern workspace"
             className="w-full h-full object-cover will-change-transform scale-110 origin-top"
+            loading="lazy"
           />
-          <div className="absolute p-3 sm:p-4 rounded-full bottom-3 right-3 sm:bottom-4 sm:right-4 border border-theme-border bg-surface soft-shadow">
+          <figcaption className="absolute p-3 sm:p-4 rounded-full bottom-3 right-3 sm:bottom-4 sm:right-4 border border-theme-border bg-surface soft-shadow">
             <div className="flex flex-col gap-1">
               <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 UI/UX & Frontend
               </span>
             </div>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
 
         <div
           data-reveal
           className="flex flex-col w-full md:w-[54%] lg:flex-1 min-w-0 gap-4 sm:gap-6"
         >
           <h3 className="theme-base text-lg sm:text-xl font-bold tracking-tight text-theme-heading">
-            Hi, I’m Brian.
+            Hi, I'm Brian.
           </h3>
           <p className="theme-base text-sm sm:text-base md:text-lg text-left sm:text-justify text-theme-secondary">
             I am a digital product designer and frontend student navigating the
@@ -63,34 +72,37 @@ export function AboutSection() {
             web code.
           </p>
 
-          <div className="theme-base mt-4 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full">
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow">
-              <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
+          <dl
+            className="theme-base mt-4 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full"
+            aria-label="Quick facts about Brian"
+          >
+            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+              <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Location
-              </span>
-              <span className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
+              </dt>
+              <dd className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
                 Malang, Indonesia
-              </span>
+              </dd>
             </div>
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow">
-              <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
+            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+              <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Focus
-              </span>
-              <span className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
+              </dt>
+              <dd className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
                 UI/UX & Frontend
-              </span>
+              </dd>
             </div>
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow">
-              <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
+            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+              <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Current Role
-              </span>
-              <span className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
+              </dt>
+              <dd className="theme-base font-semibold mt-0.5 text-xs text-theme-heading">
                 Student
-              </span>
+              </dd>
             </div>
-          </div>
+          </dl>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

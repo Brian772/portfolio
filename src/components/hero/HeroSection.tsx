@@ -126,15 +126,19 @@ export function HeroSection() {
   ];
 
   return (
-    <div
+    <section
       ref={heroRef}
+      aria-labelledby="hero-heading"
       className="relative w-full flex flex-col pt-2 sm:pt-4 pb-16 lg:pb-60 lg:pt-6 will-change-transform"
       id="home"
     >
       <div className="relative w-full min-w-0" data-parallax="title">
         {/* Name / Main Heading */}
         <div className="select-none" data-hero>
-          <h1 className="theme-base text-[clamp(2.15rem,9.5vw,8.625rem)] font-bold tracking-tight leading-[0.95] sm:leading-[0.92] text-theme-heading wrap-break-words">
+          <h1
+            id="hero-heading"
+            className="theme-base text-[clamp(2.15rem,9.5vw,8.625rem)] font-bold tracking-tight leading-[0.95] sm:leading-[0.92] text-theme-heading wrap-break-words"
+          >
             Brian Ardhisswara
           </h1>
         </div>
@@ -143,12 +147,17 @@ export function HeroSection() {
       <div className="relative w-full min-w-0" data-parallax="role">
         {/* Role Subheading */}
         <div className="select-none relative mt-1 sm:mt-0" data-hero>
-          <h2 className="text-[clamp(1.15rem,6.2vw,5.875rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94] invisible">
+          <h2
+            id="hero-role"
+            className="text-[clamp(1.15rem,6.2vw,5.875rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94] invisible"
+            aria-hidden="true"
+          >
             {ENTHUSIAST_TEXT}
           </h2>
           <h2
             ref={enthusiastRef}
             className="absolute inset-0 text-[clamp(1.15rem,6.2vw,5.875rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94]"
+            aria-hidden="true"
           />
         </div>
       </div>
@@ -157,6 +166,7 @@ export function HeroSection() {
       <div className="relative mt-4 sm:mt-6 max-w-2xl" data-parallax="copy">
         <div className="relative" data-hero>
           <p
+            id="hero-description"
             aria-hidden="true"
             className="theme-base text-sm sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary invisible"
           >
@@ -165,12 +175,13 @@ export function HeroSection() {
           <p
             ref={textRef}
             className="absolute inset-0 theme-base text-sm sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary"
+            aria-live="polite"
           />
         </div>
       </div>
 
       {/* Mastered Tech Stack - GSAP Infinite Scroll */}
-      <div data-parallax="marquee">
+      <div data-parallax="marquee" aria-label="Technology stack showcase">
         <TechStackMarquee />
       </div>
 
@@ -200,24 +211,30 @@ export function HeroSection() {
             <a
               href="#work"
               className="group inline-flex w-full sm:w-auto items-center justify-between sm:justify-center gap-3 px-5 sm:px-6 py-3.5 rounded-full bg-brand hover:bg-brand-hover text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm font-semibold tracking-wide transition-all"
+              aria-label="Explore my portfolio projects"
             >
               <span>Explore My Work</span>
               <ArrowUpRight
                 size={17}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                aria-hidden="true"
               />
             </a>
             <a
               href="#process"
               className="theme-base inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-theme-border bg-surface text-theme-heading hover:bg-card-hover soft-shadow text-sm font-medium hover:-translate-y-0.5 transition-all"
+              aria-label="Learn about my design and development process"
             >
               <span>About My Process</span>
-              <ArrowRight size={17} className="text-brand" />
+              <ArrowRight size={17} className="text-brand" aria-hidden="true" />
             </a>
           </div>
 
           {/* Metadata Sidebar / Card */}
-          <div className="theme-base lg:col-span-3 flex flex-col sm:flex-row lg:flex-col justify-between lg:items-end gap-3.5 text-xs p-4 rounded-2xl sm:rounded-3xl border border-theme-border bg-surface soft-shadow">
+          <aside
+            className="theme-base lg:col-span-3 flex flex-col sm:flex-row lg:flex-col justify-between lg:items-end gap-3.5 text-xs p-4 rounded-2xl sm:rounded-3xl border border-theme-border bg-surface soft-shadow"
+            aria-label="Quick facts"
+          >
             {metaItems.map(({ label, value, highlight }) => (
               <div key={label} className="flex flex-col lg:items-end">
                 <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
@@ -232,9 +249,9 @@ export function HeroSection() {
                 </span>
               </div>
             ))}
-          </div>
+          </aside>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

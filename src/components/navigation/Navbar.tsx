@@ -83,24 +83,29 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   }
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 py-3 px-3 sm:py-3.5 sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 w-full z-50 py-3 px-3 sm:py-3.5 sm:px-6 lg:px-8" role="banner">
       <div className="theme-base max-w-[1540px] mx-auto backdrop-blur-md border border-theme-border rounded-3xl lg:rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 soft-shadow bg-nav text-theme-heading">
         <div className="flex items-center min-w-0">
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
             className="text-base sm:text-lg lg:text-xl font-bold tracking-tight hover:text-brand transition-colors truncate"
+            aria-label="Brian Ardhisswara - Home"
           >
             <span className="sm:hidden">Brian</span>
             <span className="hidden sm:inline">Brian Ardhisswara</span>
           </a>
         </div>
 
-        <nav className="theme-base relative hidden lg:flex items-center gap-1.5 p-1 rounded-full border border-theme-border-subtle bg-nav-inner">
+        <nav
+          className="theme-base relative hidden lg:flex items-center gap-1.5 p-1 rounded-full border border-theme-border-subtle bg-nav-inner"
+          aria-label="Main navigation"
+        >
           <div
             ref={indicatorRef}
             className="absolute top-1 left-0 h-[calc(100%-8px)] rounded-full bg-active-pill shadow-sm"
             style={{ willChange: "transform, width" }}
+            aria-hidden="true"
           />
 
           {navItems.map((tab) => (
@@ -118,7 +123,7 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                   : "text-theme-secondary hover:text-theme-heading"
               }`}
             >
-              {tab}
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </a>
           ))}
         </nav>
