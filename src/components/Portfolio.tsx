@@ -12,7 +12,6 @@ import { SocialDivider } from "./footer/SocialDivider";
 import { AboutSection } from "./about/AboutSection";
 import { ProcessSection } from "./process/ProcessSection";
 import { ContactSection } from "./contact/ContactSection";
-import { BottomFooter } from "./footer/BottomFooter";
 import { TabType } from "./types";
 import { CustomScrollbar } from "./common/CustonScroll";
 import { usePageAnimations } from "./hooks/usePageAnimations";
@@ -69,7 +68,6 @@ function PortfolioContent() {
           <SocialDivider />
         </div>
       </main>
-      <BottomFooter />
     </div>
   );
 }

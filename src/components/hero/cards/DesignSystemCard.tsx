@@ -13,13 +13,13 @@ export function DesignSystemCard() {
   return (
     <div className="md:col-span-4 z-20" data-hero>
       <div
-        className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-3xl soft-card-shadow max-w-[320px] hover:-translate-y-1"
+        className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-2xl soft-card-shadow max-w-[320px] hover:-translate-y-1"
         style={{
           transition:
             "transform 0.2s ease, background-color 0.45s cubic-bezier(0.4,0,0.2,1), border-color 0.45s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-        <div className="theme-base bg-surface border border-theme-border rounded-2xl p-4">
+        <div className="theme-base bg-surface border border-theme-border rounded-xl p-4">
           <div className="flex items-center justify-between text-xs mb-3">
             <span className="px-2.5 py-0.5 rounded-full bg-brand-tint text-brand font-semibold text-[11px] uppercase tracking-wider">
               Design System

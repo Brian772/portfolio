@@ -8,7 +8,7 @@ export function ProcessCard() {
       className="md:col-span-4 z-20 flex justify-start md:justify-end"
       data-hero
     >
-      <div className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-3xl soft-card-shadow max-w-[320px] w-full bg-surface">
+      <div className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-2xl soft-card-shadow max-w-[320px] w-full bg-surface">
         <div className="flex items-center justify-between text-xs mb-2.5">
           <span className="text-[11px] uppercase tracking-wider text-brand font-semibold">
             My Process

@@ -33,7 +33,7 @@ export function AboutSection() {
       >
         <figure
           data-reveal
-          className="w-full max-w-sm md:max-w-none md:w-[42%] lg:w-[34%] aspect-9/11 rounded-2xl relative overflow-hidden shrink-0 bg-theme-border-subtle"
+          className="w-full max-w-sm md:max-w-none md:w-[42%] lg:w-[34%] aspect-9/11 rounded-xl relative overflow-hidden shrink-0 bg-theme-border-subtle"
           aria-label="Brian Ardhisswara portrait"
         >
           <img
@@ -57,7 +57,7 @@ export function AboutSection() {
           className="flex flex-col w-full md:w-[54%] lg:flex-1 min-w-0 gap-4 sm:gap-6"
         >
           <h3 className="theme-base text-lg sm:text-xl font-bold tracking-tight text-theme-heading">
-            Hi, I'm Brian.
+            Hi, I&apos;m Brian.
           </h3>
           <p className="theme-base text-sm sm:text-base md:text-lg text-left sm:text-justify text-theme-secondary">
             I am a digital product designer and frontend student navigating the
@@ -76,7 +76,7 @@ export function AboutSection() {
             className="theme-base mt-4 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full"
             aria-label="Quick facts about Brian"
           >
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex flex-col gap-1 p-4 rounded-xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
               <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Location
               </dt>
@@ -84,7 +84,7 @@ export function AboutSection() {
                 Malang, Indonesia
               </dd>
             </div>
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex flex-col gap-1 p-4 rounded-xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
               <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Focus
               </dt>
@@ -92,7 +92,7 @@ export function AboutSection() {
                 UI/UX & Frontend
               </dd>
             </div>
-            <div className="flex flex-col gap-1 p-4 rounded-2xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
+            <div className="flex flex-col gap-1 p-4 rounded-xl border border-theme-border bg-surface soft-shadow hover:scale-[1.02] transition-transform duration-300">
               <dt className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
                 Current Role
               </dt>

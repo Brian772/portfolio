@@ -16,7 +16,7 @@ export function ExploringCard() {
       className="md:col-span-4 z-20 flex justify-start md:justify-center"
       data-hero
     >
-      <div className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-3xl soft-shadow w-full max-w-[320px] bg-surface">
+      <div className="theme-base p-4 sm:p-5 backdrop-blur-md border border-theme-border rounded-2xl soft-shadow w-full max-w-[320px] bg-surface">
         <div className="flex items-center justify-between text-xs mb-3">
           <span className="text-[11px] uppercase tracking-wider text-theme-muted font-semibold">
             Currently Exploring

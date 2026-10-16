@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useLayoutEffect, useRef } from "react";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { TechStackMarquee } from "./TechStackMarquee";
-import { MetaItem } from "../types";
 import { registerGsapPlugins } from "../motion/registerGsap";
+import TechText from "../reactbits/TechText";
 
 const TEXT =
   "I enjoy turning ideas into interfaces that feel simple, intentional, and useful from early concepts and visual systems to functional web experiences.";
-const ENTHUSIAST_TEXT = "UI/UX Enthusiast";
+const ROLES = ["UI/UX Enthusiast", "Frontend Developer"];
+const TYPE_SPEED = 0.04; // seconds per character
+const PAUSE_DURATION = 3; // seconds
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,9 @@ export function HeroSection() {
 
   useLayoutEffect(() => {
     registerGsapPlugins();
+
+    // Cleanup reference for role animation (needs to be accessible in cleanup)
+    let roleAnimationCtx: gsap.Context | null = null;
 
     const ctx = gsap.context(() => {
       gsap.from("[data-hero]", {
@@ -40,28 +44,68 @@ export function HeroSection() {
         });
       }
 
+      // Initialize the looping role animation
       if (enthusiastRef.current) {
-        gsap.set(enthusiastRef.current, { text: "" });
-
-        gsap.to(enthusiastRef.current, {
-          duration: ENTHUSIAST_TEXT.length * 0.04,
-          text: ENTHUSIAST_TEXT,
-          ease: "none",
-          delay: 0.4,
-        });
+        const target = enthusiastRef.current;
+        target.textContent = "";
+        animateRolesLoop(target);
       }
 
       const mm = gsap.matchMedia();
+
+      function animateRolesLoop(target: HTMLParagraphElement) {
+        roleAnimationCtx = gsap.context(() => {
+          // `state.count` tracks how many characters are currently visible.
+          // Animating this number drives a real typewriter effect for both
+          // typing in AND deleting, letter by letter.
+          const state = { count: 0 };
+          const timeline = gsap.timeline({ repeat: -1 });
+
+          // Small delay before the first role starts typing
+          timeline.to({}, { duration: 0.4 });
+
+          ROLES.forEach((role, index) => {
+            const typeDuration = role.length * TYPE_SPEED;
+
+            // Type in — reveal one character at a time
+            timeline.to(state, {
+              count: role.length,
+              duration: typeDuration,
+              ease: "none",
+              onUpdate: () => {
+                target.textContent = role.slice(0, Math.round(state.count));
+              },
+            });
+
+            // Hold the full role on screen
+            timeline.to({}, { duration: PAUSE_DURATION });
+
+            // Type out — remove one character at a time
+            timeline.to(state, {
+              count: 0,
+              duration: typeDuration,
+              ease: "none",
+              onUpdate: () => {
+                target.textContent = role.slice(0, Math.round(state.count));
+              },
+            });
+
+            // Brief pause before the next role (skip after the last one)
+            if (index < ROLES.length - 1) {
+              timeline.to({}, { duration: 0.5 });
+            }
+          });
+        }, target);
+      }
 
       mm.add(
         "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
         () => {
           const layers: Array<[string, number, number]> = [
-            ["[data-parallax='title']", 90, 0.04],
-            ["[data-parallax='role']", 140, 0.06],
-            ["[data-parallax='copy']", 60, 0],
-            ["[data-parallax='marquee']", 180, 0],
-            ["[data-parallax='footer']", 240, 0],
+            ["[data-parallax='title']", 150, 0.07],
+            ["[data-parallax='role']", 200, 0.12],
+            ["[data-parallax='copy']", 110, 0.04],
+            ["[data-parallax='marquee']", 240, 0],
           ];
 
           layers.forEach(([selector, y, scaleDelta]) => {
@@ -77,7 +121,7 @@ export function HeroSection() {
                 trigger: heroRef.current,
                 start: "top top",
                 end: "bottom top",
-                scrub: 1.15,
+                scrub: 1,
               },
             });
           });
@@ -88,10 +132,9 @@ export function HeroSection() {
         "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
         () => {
           const layers: Array<[string, number]> = [
-            ["[data-parallax='title']", 36],
-            ["[data-parallax='role']", 52],
-            ["[data-parallax='marquee']", 48],
-            ["[data-parallax='footer']", 64],
+            ["[data-parallax='title']", 70],
+            ["[data-parallax='role']", 100],
+            ["[data-parallax='marquee']", 110],
           ];
 
           layers.forEach(([selector, y]) => {
@@ -105,7 +148,7 @@ export function HeroSection() {
                 trigger: heroRef.current,
                 start: "top top",
                 end: "bottom top",
-                scrub: 0.8,
+                scrub: 0.6,
               },
             });
           });
@@ -115,32 +158,46 @@ export function HeroSection() {
 
     return () => {
       ctx.revert();
+      roleAnimationCtx?.revert();
       gsap.matchMedia().revert();
     };
   }, []);
-
-  const metaItems: MetaItem[] = [
-    { label: "Core Craft", value: "UI/UX · Frontend · Product · Interaction" },
-    { label: "Perspective", value: "Curious · Intentional · Experimental" },
-    { label: "Location", value: "Malang, Indonesia", highlight: true },
-  ];
 
   return (
     <section
       ref={heroRef}
       aria-labelledby="hero-heading"
-      className="relative w-full flex flex-col pt-2 sm:pt-4 pb-16 lg:pb-60 lg:pt-6 will-change-transform"
+      className="relative w-full min-h-[calc(100svh-8rem)] sm:min-h-[calc(100svh-9rem)] lg:min-h-[calc(100svh-10rem)] flex flex-col justify-center text-left py-6 sm:py-8 will-change-transform"
       id="home"
     >
       <div className="relative w-full min-w-0" data-parallax="title">
-        {/* Name / Main Heading */}
-        <div className="select-none" data-hero>
-          <h1
-            id="hero-heading"
-            className="theme-base text-[clamp(2.15rem,9.5vw,8.625rem)] font-bold tracking-tight leading-[0.95] sm:leading-[0.92] text-theme-heading wrap-break-words"
-          >
-            Brian Ardhisswara
-          </h1>
+        {/* Name / Main Heading — accessible heading for SEO & screen readers */}
+        <h1 id="hero-heading" className="sr-only">
+          Brian Ardhisswara
+        </h1>
+        {/* Interactive wordmark (React Bits TechText) */}
+        <div
+          className="select-none relative w-full h-[clamp(4rem,16vw,13rem)] text-theme-heading"
+          data-hero
+        >
+          {/* TechText memberi inset 5% untuk align="left"; geser balik agar
+              huruf pertama rata persis dengan role & statement (flush left). */}
+          <TechText
+            text="Brian Ardhisswara"
+            fontWeight={700}
+            fontSize={150}
+            letterSpacing={-0.03}
+            align="left"
+            accentColor="#ff5a36"
+            reveal="letter"
+            dashLength={3}
+            dashGap={2}
+            specks={24}
+            intro="assemble"
+            introDuration={1.3}
+            strokeWidth={1.5}
+            style={{ transform: "translateX(-5%)" }}
+          />
         </div>
       </div>
 
@@ -149,14 +206,14 @@ export function HeroSection() {
         <div className="select-none relative mt-1 sm:mt-0" data-hero>
           <h2
             id="hero-role"
-            className="text-[clamp(1.15rem,6.2vw,5.875rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94] invisible"
+            className="text-[clamp(1rem,3.5vw,3.25rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94] invisible"
             aria-hidden="true"
           >
-            {ENTHUSIAST_TEXT}
+            {ROLES[0]}
           </h2>
           <h2
             ref={enthusiastRef}
-            className="absolute inset-0 text-[clamp(1.15rem,6.2vw,5.875rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94]"
+            className="absolute inset-0 text-[clamp(1rem,3.5vw,3.25rem)] uppercase font-bold tracking-tight text-brand leading-[1.05] sm:leading-[0.94]"
             aria-hidden="true"
           />
         </div>
@@ -168,89 +225,20 @@ export function HeroSection() {
           <p
             id="hero-description"
             aria-hidden="true"
-            className="theme-base text-sm sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary invisible"
+            className="theme-base text-sm sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary"
           >
-            {TEXT}
+            I enjoy turning ideas into interfaces that feel simple, intentional, and useful from early concepts and visual systems to functional web experiences.
           </p>
-          <p
-            ref={textRef}
-            className="absolute inset-0 theme-base text-sm sm:text-lg md:text-xl leading-relaxed font-normal text-theme-secondary"
-            aria-live="polite"
-          />
         </div>
       </div>
 
       {/* Mastered Tech Stack - GSAP Infinite Scroll */}
-      <div data-parallax="marquee" aria-label="Technology stack showcase">
+      <div
+        data-parallax="marquee"
+        aria-label="Technology stack showcase"
+        className="w-full mt-16 sm:mt-20 lg:mt-28"
+      >
         <TechStackMarquee />
-      </div>
-
-      {/* Manifesto + CTAs + Meta Info */}
-      <div data-parallax="footer">
-        <div
-          className="theme-base grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch lg:items-center pt-4 sm:pt-10 border-t border-theme-border mt-6"
-          data-hero
-        >
-          {/* Manifesto */}
-          <div className="lg:col-span-5 flex flex-col gap-2 min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-brand font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-tint">
-                Manifesto
-              </span>
-              <div className="theme-base h-px flex-1 bg-theme-border" />
-            </div>
-            <p className="theme-base text-sm sm:text-base leading-relaxed text-theme-secondary">
-              I enjoy exploring the space between design and development.
-              Creating interfaces that not only look good, but also make sense
-              to use.
-            </p>
-          </div>
-
-          {/* Action CTAs */}
-          <div className="lg:col-span-4 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
-            <a
-              href="#work"
-              className="group inline-flex w-full sm:w-auto items-center justify-between sm:justify-center gap-3 px-5 sm:px-6 py-3.5 rounded-full bg-brand hover:bg-brand-hover text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm font-semibold tracking-wide transition-all"
-              aria-label="Explore my portfolio projects"
-            >
-              <span>Explore My Work</span>
-              <ArrowUpRight
-                size={17}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                aria-hidden="true"
-              />
-            </a>
-            <a
-              href="#process"
-              className="theme-base inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-theme-border bg-surface text-theme-heading hover:bg-card-hover soft-shadow text-sm font-medium hover:-translate-y-0.5 transition-all"
-              aria-label="Learn about my design and development process"
-            >
-              <span>About My Process</span>
-              <ArrowRight size={17} className="text-brand" aria-hidden="true" />
-            </a>
-          </div>
-
-          {/* Metadata Sidebar / Card */}
-          <aside
-            className="theme-base lg:col-span-3 flex flex-col sm:flex-row lg:flex-col justify-between lg:items-end gap-3.5 text-xs p-4 rounded-2xl sm:rounded-3xl border border-theme-border bg-surface soft-shadow"
-            aria-label="Quick facts"
-          >
-            {metaItems.map(({ label, value, highlight }) => (
-              <div key={label} className="flex flex-col lg:items-end">
-                <span className="text-theme-muted font-medium text-[11px] uppercase tracking-wider">
-                  {label}
-                </span>
-                <span
-                  className={`theme-base font-semibold mt-0.5 text-xs ${
-                    highlight ? "text-brand" : "text-theme-heading"
-                  }`}
-                >
-                  {value}
-                </span>
-              </div>
-            ))}
-          </aside>
-        </div>
       </div>
     </section>
   );

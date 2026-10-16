@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { TabType } from "../types";
-import { RectAreaLightUniformsLib } from "three/examples/jsm/Addons.js";
 
 export function useScrollSpy(sectionIds: TabType[]) {
   const [activeId, setActiveId] = useState<TabType>(sectionIds[0]);

@@ -39,7 +39,7 @@ export function ContactSection() {
         const error = await response.json();
         setStatus(`Error: ${error.message || "Failed to send message"}`);
       }
-    } catch (error) {
+    } catch {
       setStatus("Error sending message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -56,7 +56,7 @@ export function ContactSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
           <div className="order-2 md:order-1">
             <div className="space-y-6 lg:space-y-8">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-tint flex items-center justify-center">
                   <Globe size={18} className="text-brand" aria-hidden="true" />
                 </div>
@@ -70,7 +70,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-tint flex items-center justify-center">
                   <Mail size={18} className="text-brand" aria-hidden="true" />
                 </div>
@@ -87,7 +87,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-coral-tint flex items-center justify-center">
                   <Phone size={18} className="text-coral" aria-hidden="true" />
                 </div>
@@ -120,7 +120,7 @@ export function ContactSection() {
           </div>
 
           <div className="order-1 md:order-2 w-full">
-            <div className="bg-surface rounded-2xl border border-theme-border p-5 sm:p-6 lg:p-8 soft-shadow">
+            <div className="bg-surface rounded-xl border border-theme-border p-5 sm:p-6 lg:p-8 soft-shadow">
               <h2
                 id="contact-heading"
                 className="theme-base text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-theme-heading mb-6"

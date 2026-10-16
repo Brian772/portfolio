@@ -30,7 +30,7 @@ export function ProcessSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 w-full">
           <article
             data-reveal
-            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300"
+            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300"
           >
             <header>
               <span className="text-theme-muted font-medium text-sm uppercase tracking-wider rounded-full px-2 py-1 w-max group-hover:text-brand group-hover:font-bold group-hover:bg-theme-border-subtle transition-colors duration-300">
@@ -56,7 +56,7 @@ export function ProcessSection() {
 
           <article
             data-reveal
-            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300"
+            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300"
           >
             <header>
               <span className="text-theme-muted font-medium text-sm uppercase tracking-wider rounded-full px-2 py-1 w-max group-hover:text-brand group-hover:font-bold group-hover:bg-theme-border-subtle transition-colors duration-300">
@@ -82,7 +82,7 @@ export function ProcessSection() {
 
           <article
             data-reveal
-            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-2xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300 md:col-span-2 xl:col-span-1"
+            className="group flex flex-col gap-1 p-4 sm:p-5 rounded-xl border border-theme-border bg-surface soft-shadow hover:-translate-y-2 transition-transform duration-300 md:col-span-2 xl:col-span-1"
           >
             <header>
               <span className="text-theme-muted font-medium text-sm uppercase tracking-wider rounded-full px-2 py-1 w-max group-hover:text-brand group-hover:font-bold group-hover:bg-theme-border-subtle transition-colors duration-300">
@@ -133,7 +133,7 @@ export function ProcessSection() {
           className="flex flex-col gap-4 sm:gap-6 w-full min-w-0"
         >
           <article
-            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-2xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
+            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
           >
             <header className="flex flex-col lg:items-center gap-2 lg:flex-row lg:gap-6">
               <time className="theme-base text-sm px-0 sm:px-4 py-2 text-theme-secondary" dateTime="2024">
@@ -148,7 +148,7 @@ export function ProcessSection() {
             </p>
           </article>
           <article
-            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-2xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
+            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
           >
             <header className="flex flex-col lg:items-center gap-2 lg:flex-row lg:gap-6">
               <time className="theme-base text-sm px-0 sm:px-4 py-2 text-theme-secondary" dateTime="2025">
@@ -163,7 +163,7 @@ export function ProcessSection() {
             </p>
           </article>
           <article
-            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-2xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
+            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
           >
             <header className="flex flex-col lg:items-center gap-2 lg:flex-row lg:gap-6">
               <time className="theme-base text-sm px-0 sm:px-4 py-2 text-theme-secondary" dateTime="2026">
@@ -178,7 +178,7 @@ export function ProcessSection() {
             </p>
           </article>
           <article
-            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-2xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
+            className="group flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 rounded-xl border border-theme-border bg-surface p-4 sm:p-6 soft-shadow hover:-translate-y-1 transition-transform duration-300"
           >
             <header className="flex flex-col lg:items-center gap-2 lg:flex-row lg:gap-6">
               <span className="theme-base w-max text-sm font-bold uppercase px-4 rounded-full bg-theme-border-subtle text-brand py-2" aria-label="Current status">

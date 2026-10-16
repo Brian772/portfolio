@@ -84,12 +84,12 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 py-3 px-3 sm:py-3.5 sm:px-6 lg:px-8" role="banner">
-      <div className="theme-base max-w-[1540px] mx-auto backdrop-blur-md border border-theme-border rounded-3xl lg:rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 soft-shadow bg-nav text-theme-heading">
+      <div className="theme-base max-w-[1540px] mx-auto flex items-center justify-between gap-2 sm:gap-3 text-theme-heading">
         <div className="flex items-center min-w-0">
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="text-base sm:text-lg lg:text-xl font-bold tracking-tight hover:text-brand transition-colors truncate"
+            className="backdrop-blur-md border border-theme-border rounded-full bg-nav soft-shadow px-3.5 sm:px-4 py-2 text-base sm:text-lg lg:text-xl font-bold tracking-tight hover:text-brand transition-colors truncate"
             aria-label="Brian Ardhisswara - Home"
           >
             <span className="sm:hidden">Brian</span>
@@ -98,7 +98,7 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
         </div>
 
         <nav
-          className="theme-base relative hidden lg:flex items-center gap-1.5 p-1 rounded-full border border-theme-border-subtle bg-nav-inner"
+          className="theme-base relative hidden lg:flex items-center gap-1.5 p-1 rounded-full border border-theme-border bg-nav-inner backdrop-blur-md soft-shadow"
           aria-label="Main navigation"
         >
           <div
@@ -134,7 +134,7 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
             type="button"
-            className="theme-base w-9 h-9 rounded-full flex items-center justify-center border border-theme-border bg-surface text-theme-secondary hover:text-brand hover:border-brand/40 overflow-hidden soft-shadow active:scale-90 cursor-pointer"
+            className="theme-base backdrop-blur-md w-9 h-9 rounded-full flex items-center justify-center border border-theme-border bg-nav text-theme-secondary hover:text-brand hover:border-brand/40 overflow-hidden soft-shadow active:scale-90 cursor-pointer"
             style={{
               transition:
                 "background-color 0.45s cubic-bezier(0.4,0,0.2,1), border-color 0.45s cubic-bezier(0.4,0,0.2,1), color 0.45s cubic-bezier(0.4,0,0.2,1), transform 0.12s ease",
@@ -161,7 +161,7 @@ export function Navbar({ activeTab, setActiveTab }: NavbarProps) {
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="theme-base lg:hidden w-9 h-9 rounded-full flex items-center justify-center border border-theme-border bg-surface text-theme-heading hover:text-brand hover:border-brand/40 soft-shadow active:scale-90 cursor-pointer"
+            className="theme-base backdrop-blur-md lg:hidden w-9 h-9 rounded-full flex items-center justify-center border border-theme-border bg-nav text-theme-heading hover:text-brand hover:border-brand/40 soft-shadow active:scale-90 cursor-pointer"
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

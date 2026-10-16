@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
 import { Varela_Round } from "next/font/google";
 import "./globals.css";
 
@@ -87,15 +86,11 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const theme = cookieStore.get("theme")?.value;
-  const isDark = theme === "dark";
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -148,12 +143,15 @@ export default async function RootLayout({
   };
 
   return (
-    <html
-      lang="en"
-      className={`${varelaRound.className} ${isDark ? "dark" : ""}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={varelaRound.className} suppressHydrationWarning>
       <head>
+        {/* Apply the saved theme before first paint. Reading the cookie here
+            instead of via cookies() keeps this route statically prerenderable. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var m=document.cookie.match(/(?:^|;\\s*)theme=([^;]+)/);var c=m&&m[1];var s=null;try{s=window.localStorage.getItem('theme')}catch(e){}if(c==='dark'||s==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -161,12 +159,6 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
         />
         <link rel="sitemap" href="/sitemap.xml" />
         <link rel="robots" href="/robots.txt" />

@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Search } from "lucide-react";
-import { ClubItem } from "../types";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 export function StrideDailyProjectCard() {
   return (
     <article
-      className="theme-base mt-8 border border-theme-border rounded-3xl sm:rounded-4xl p-4 sm:p-8 lg:p-10 soft-card-shadow hover:border-brand/40 group bg-surface"
+      className="theme-base mt-8 border border-theme-border rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 soft-card-shadow hover:border-brand/40 group bg-surface"
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
@@ -60,7 +60,7 @@ export function StrideDailyProjectCard() {
             ].map(([k, v]) => (
               <div
                 key={k}
-                className="theme-base p-3.5 rounded-2xl border border-theme-border-subtle bg-subtle"
+                className="theme-base p-3.5 rounded-xl border border-theme-border-subtle bg-subtle"
               >
                 <dt className="text-[11px] text-theme-muted font-medium uppercase">
                   {k}
@@ -88,12 +88,13 @@ export function StrideDailyProjectCard() {
 
         {/* Right Column: Mock Browser Preview */}
         <figure className="lg:col-span-7" itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <div className="relative w-full aspect-4/3 sm:aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-theme-border-subtle bg-subtle">
-            <img
+          <div className="relative w-full aspect-4/3 sm:aspect-video rounded-xl sm:rounded-2xl overflow-hidden border border-theme-border-subtle bg-subtle">
+            <Image
               src="/images/stride-project.png"
               alt="Stride Daily Habit Tracker - mobile and desktop interface showing habit tracking dashboard and progress visualization"
-              className="object-cover w-full h-full"
-              loading="lazy"
+              fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
+              className="object-cover"
             />
           </div>
           <figcaption className="sr-only">
